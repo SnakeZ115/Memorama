@@ -1,11 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/styles.css">
     <title>Memorama</title>
+    <script src="https://kit.fontawesome.com/41a47aed0e.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    
+    <div id="ventanaPrincipal">
+        <div class="ventana1 ventana">
+            <h1 class="no-margen">Memorama</h1>
+            <p class="no-margen">Presiona el botón para continuar</p>
+            <div class="boton" onclick="mostrarVentana2()">Comenzar</div>
+        </div>        
+    </div>
+
+    <div id="ventanaSecundaria" class="hidden">
+        <div class="ventana2 ventana">  
+            <h1 class="no-margen">Selecciona el tamaño</h1>
+            <div class="ventana2-tamanos">
+                <p onclick="generarTablero(4,3)">4x3</p>
+                <p>4x4</p>
+                <p>5x4</p>
+            </div>
+        </div>    
+    </div>
+
+    <div id="tablero">      
+    </div>
+
+
+
+
+
+    <script src="./js/script.js"></script>
 </body>
 </html>
