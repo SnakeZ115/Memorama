@@ -1,5 +1,6 @@
 let cartasSeleccionadas = []
 let pares = 0;
+let maxPares = 0;
 
 function mostrarVentana2() {
     let ventanaPrincipal = document.getElementById('ventanaPrincipal');
@@ -46,7 +47,7 @@ function comprobarPar(cartasSeleccionadas) {
             cartaTrasera2.classList.remove("hidden");
         }        
     }, 1000);
-    if(pares === 5) {
+    if(pares === maxPares-1) {
         window.alert("HAS GANADO");
         pares = 0;
     }
@@ -76,6 +77,10 @@ function ponerCartas(filas, columnas) {
     tablero.innerHTML = cartas.join(" ");
 }
 
+function posiblesPares(filas, columnas) {
+    maxPares = (filas * columnas)/2;
+}
+
 function generarTablero(filas, columnas) {
     ocultarVentana2();
     let tablero = document.getElementById('tablero');
@@ -83,23 +88,30 @@ function generarTablero(filas, columnas) {
     tablero.style.gridTemplateColumns = `repeat(${filas}, 1fr)`
     tablero.style.columnGap = '30px'
     tablero.style.rowGap = '30px';
+    posiblesPares(filas,columnas);
     cargarIconos();
     ponerCartas(filas,columnas);
 }
 
 function cargarIconos() {
     iconos = [
-        '<img src="./imgs/Karina.jpg" alt="Karina">',
-        '<img src="./imgs/Hwasa.jpg" alt="Hwasa">',
-        '<img src="./imgs/Karina.jpg" alt="Karina">',
-        '<img src="./imgs/Karina.jpg" alt="Karina">',
-        '<img src="./imgs/Karina.jpg" alt="Karina">',
-        '<img src="./imgs/Karina.jpg" alt="Karina">',
+        '<i class="fa-solid fa-dungeon"></i>',
+        '<i class="fa-solid fa-square-full"></i>',
+        '<i class="fa-solid fa-dice-six"></i>',
+        '<i class="fa-solid fa-ghost"></i>',
+        '<i class="fa-solid fa-chess-queen"></i>',
+        '<i class="fa-solid fa-headset"></i>',
         '<i class="fa-solid fa-hand-fist"></i>',
         '<i class="fa-solid fa-wand-sparkles"></i>',
-        '<i class="fa-solid fa-headset"></i>',
+        '<i class="fa-solid fa-vr-cardboard"></i>',
         '<i class="fa-solid fa-dice-d6"></i>',
         '<i class="fa-solid fa-hat-wizard"></i>',
-        '<i class="fa-solid fa-skull-crossbones"></i>'
+        '<i class="fa-solid fa-skull-crossbones"></i>',
+        '<i class="fa-solid fa-puzzle-piece"></i>',
+        '<i class="fa-solid fa-ring"></i>',
+        '<i class="fa-solid fa-chess-rook"></i>',
+        '<i class="fa-solid fa-chess-board"></i>',
+        '<i class="fa-solid fa-chess-knight"></i>',
+        '<i class="fa-solid fa-dice-one"></i>'
     ];
 }
