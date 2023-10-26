@@ -14,6 +14,14 @@ function ocultarVentana2() {
     ventanaSecundaria.classList.add('hidden');
 }
 
+function opcionRegresar() {
+    let tablero = document.getElementById('tablero');
+    let boton = document.getElementById('contenedor-botonRegresar');
+    boton.classList.add('hidden');
+    tablero.innerHTML = "";
+    mostrarVentana2();
+}
+
 function girarCarta(index) {
     let carta = document.getElementById('carta'+index);
     let areaCarta = document.getElementById('area-carta'+index);
@@ -84,10 +92,14 @@ function posiblesPares(filas, columnas) {
 function generarTablero(filas, columnas) {
     ocultarVentana2();
     let tablero = document.getElementById('tablero');
+    let boton = document.getElementById('contenedor-botonRegresar');
+    boton.classList.remove('hidden');
+    tablero.classList.remove('hidden');
     tablero.style.display = 'grid';
     tablero.style.gridTemplateColumns = `repeat(${filas}, 1fr)`
-    tablero.style.columnGap = '30px'
+    tablero.style.columnGap = '30px';
     tablero.style.rowGap = '30px';
+    tablero.style.maxHeight = '90vh';
     posiblesPares(filas,columnas);
     cargarIconos();
     ponerCartas(filas,columnas);

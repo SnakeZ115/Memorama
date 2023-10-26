@@ -7,9 +7,9 @@
 }
 
 html, body {
-    height: 150%;
+    height: 100%;
     display: flex;
-    margin: 20px;
+    flex-direction: column-reverse;
     align-items: center;
     justify-content: center;
     background-color: var(--azulClaro);
@@ -47,6 +47,7 @@ html, body {
     padding: 10px;
     border-radius: 20px;
     cursor: pointer;
+    color: var(--blanco);
 }
 
 .boton:hover {
@@ -93,5 +94,8 @@ img {
     border-radius: 50%;
 }
 
-
-
+#contenedor-botonRegresar div {
+    margin: 50px 0;
+    background-color: var(--rosa);
+    font-weight: bold;
+}

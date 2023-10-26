@@ -7,7 +7,7 @@
     <title>Memorama</title>
     <script src="https://kit.fontawesome.com/41a47aed0e.js" crossorigin="anonymous"></script>
 </head>
-<body>
+<body id="body">
     <div id="ventanaPrincipal">
         <div class="ventana1 ventana">
             <h1 class="no-margen">Memorama</h1>
@@ -27,8 +27,12 @@
         </div>    
     </div>
 
-    <div id="tablero">     
+    <div id="tablero" class="hidden">     
         
+    </div>
+
+    <div id="contenedor-botonRegresar" class="hidden">
+        <div class="boton" onclick="opcionRegresar()">Regresar</div>
     </div>
 
     <script src="./js/script.js"></script>
