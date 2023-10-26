@@ -1,1 +1,1 @@
-Memorama creado con HTML, CSS y JavaScript
+Memorama creado con HTML, CSS y JavaScript.
