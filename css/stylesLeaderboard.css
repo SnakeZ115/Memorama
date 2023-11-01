@@ -1,0 +1,11 @@
+:root {
+    --azul: #1C1B4D;
+    --rosa: #B80E65;
+    --azulClaro: #1791B1;
+    --blanco: #FFFFFF;
+    --gris: #e2dfe2;
+}
+
+body {
+    background-color: var(--azulClaro);
+}

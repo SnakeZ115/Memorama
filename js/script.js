@@ -1,11 +1,22 @@
 let cartasSeleccionadas = []
 let pares = 0;
 let maxPares = 0;
+let usuario;
+
+function obtenerUsuario() {
+    let usuarioInput = document.getElementById('Usuario').value;
+    if (usuarioInput === "") {
+        usuario = "null";
+    } else {
+        usuario = usuarioInput;
+    }
+}
 
 function mostrarVentana2() {
-    let ventanaPrincipal = document.getElementById('ventanaPrincipal');
+    obtenerUsuario();
+    let ventanaUsuario = document.getElementById('ventanaUsuario');
     let ventanaSecundaria = document.getElementById('ventanaSecundaria');
-    ventanaPrincipal.classList.add('hidden');
+    ventanaUsuario.classList.add('hidden');
     ventanaSecundaria.classList.remove('hidden');
 }
 
@@ -14,11 +25,27 @@ function ocultarVentana2() {
     ventanaSecundaria.classList.add('hidden');
 }
 
+function mostrarVentanaUsuario() {
+    let ventanaPrincipal = document.getElementById('ventanaPrincipal');
+    ventanaPrincipal.classList.add('hidden');
+    let ventanaUsuario = document.getElementById('ventanaUsuario');
+    ventanaUsuario.classList.remove('hidden');
+}
+
+function ocultarVentanaUsuario() {
+    let ventanaUsuario = document.getElementById('ventanaUsuario');
+    ventanaUsuario.classList.add('hidden');
+}
+
 function opcionRegresar() {
     let tablero = document.getElementById('tablero');
     let boton = document.getElementById('contenedor-botonRegresar');
     boton.classList.add('hidden');
     tablero.innerHTML = "";
+    let cronometroDiv = document.getElementById('cronometro');
+    cronometroDiv.classList.add('hidden');
+    reiniciarCronometro();
+    pararCronometro();
     mostrarVentana2();
 }
 
@@ -57,6 +84,8 @@ function comprobarPar(cartasSeleccionadas) {
     }, 1000);
     if(pares === maxPares-1) {
         window.alert("HAS GANADO");
+        pararCronometro();
+        agregar();
         pares = 0;
     }
 }
@@ -93,16 +122,21 @@ function generarTablero(filas, columnas) {
     ocultarVentana2();
     let tablero = document.getElementById('tablero');
     let boton = document.getElementById('contenedor-botonRegresar');
+    let body = document.getElementById('body');
+    body.style.height = '120%';
     boton.classList.remove('hidden');
     tablero.classList.remove('hidden');
     tablero.style.display = 'grid';
     tablero.style.gridTemplateColumns = `repeat(${filas}, 1fr)`
     tablero.style.columnGap = '30px';
     tablero.style.rowGap = '30px';
-    tablero.style.maxHeight = '90vh';
+    tablero.style.maxHeight = '70vh';
     posiblesPares(filas,columnas);
     cargarIconos();
     ponerCartas(filas,columnas);
+    let cronometroDiv = document.getElementById('cronometro');
+    cronometroDiv.classList.remove('hidden');
+    cronometro = setInterval(actualizarCronometro,10);
 }
 
 function cargarIconos() {
@@ -126,4 +160,92 @@ function cargarIconos() {
         '<i class="fa-solid fa-chess-knight"></i>',
         '<i class="fa-solid fa-dice-one"></i>'
     ];
+}
+
+
+// CRONOMETRO
+let minutos = 0;
+let segundos = 0;
+let milisegundos = 0;
+let cronometro;
+
+let minutosSpan = document.getElementById('minutos');
+let segundosSpan = document.getElementById('segundos');
+let milisegundosSpan = document.getElementById('milisegundos');
+
+function actualizarCronometro() {
+
+    milisegundos += 1;
+
+    if (milisegundos == 100) {
+        milisegundos = 0;
+        segundos += 1;
+    }
+
+    if (segundos == 60) {
+        segundos = 0;
+        minutos += 1;
+    }
+
+    if (minutos < 10) {
+        minutosSpan.textContent = "0" + minutos;
+    } else {
+        minutosSpan.textContent = minutos;
+    }
+    
+    if (segundos < 10) {
+        segundosSpan.textContent = "0" + segundos;
+    } else {
+        segundosSpan.textContent = segundos;
+    }
+    
+    if (milisegundos < 10) {
+        milisegundosSpan.textContent = "0" + milisegundos;
+    } else {
+        milisegundosSpan.textContent = milisegundos;
+    }
+
+}
+
+function pararCronometro() {
+    clearInterval(cronometro);
+}
+
+function reiniciarCronometro() {
+    clearInterval(cronometro);
+
+    minutos = 0;
+    segundos = 0;
+    milisegundos = 0;
+
+    minutosSpan.textContent = "00";
+    segundosSpan.textContent = "00";
+    milisegundosSpan.textContent = "00";
+}
+
+// Agregar
+async function agregar() {
+    try {
+        let tiempo = `${minutos}:${segundos}:${milisegundos}`;
+        let url = "https://memorama-da5ae-default-rtdb.firebaseio.com/";
+        let jugador = {
+            Usuario: usuario,
+            Tiempo: tiempo
+        };
+
+        const config = {
+            method : 'POST',
+            body: JSON.stringify(jugador),
+            headers: {'Content-type': 'application/json; charset=UTF-8'}
+        };
+        
+        const response = await fetch(`${url}/jugadores.json`,config);
+        const jugadores = await response.json;
+
+
+    } catch (error) {
+        console.error(error);
+    }
+
+
 }

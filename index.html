@@ -12,7 +12,7 @@
         <div class="ventana1 ventana">
             <h1 class="no-margen">Memorama</h1>
             <p class="no-margen">Presiona el botón para continuar</p>
-            <div class="boton" onclick="mostrarVentana2()">Comenzar</div>
+            <div class="boton" onclick="mostrarVentanaUsuario()">Comenzar</div>
         </div>        
     </div>
 
@@ -27,8 +27,20 @@
         </div>    
     </div>
 
+    <div id="ventanaUsuario" class="hidden">
+        <div class="ventana3 ventana">
+            <h1 class="no-margen">Escribe tu usuario</h1>
+            <input type="text" name="Usuario" id="Usuario" placeholder="Usuario">
+            <div class="boton" onclick="mostrarVentana2()">Aceptar</div>
+        </div>
+    </div>
+
     <div id="tablero" class="hidden">     
         
+    </div>
+
+    <div id="cronometro" class="hidden">
+        <span id="minutos">00</span>:<span id="segundos">00</span>:<span id="milisegundos">00</span>
     </div>
 
     <div id="contenedor-botonRegresar" class="hidden">
